@@ -1,5 +1,3 @@
-import React from "react";
-
 const Pizza = (props) => {
   return (
     <div className="Pizza">
