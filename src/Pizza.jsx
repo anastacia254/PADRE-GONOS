@@ -1,6 +1,4 @@
 const Pizza = (props) => {
-
-
   return (
     <div className="pizza" onClick={() => console.log("Pizza Clicked", props.name)}>
       <h1>{props.name}</h1>
