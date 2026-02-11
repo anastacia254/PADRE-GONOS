@@ -1,6 +1,4 @@
 import { createRoot } from "react-dom/client";
-import Pizza from "./Pizza.jsx";
-import "./style.css";
 import Order from "./Order.jsx";
 
 
