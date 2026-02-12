@@ -23,7 +23,7 @@ export default function Order() {
 
   useEffect(() => {
     fetchPizzaTypes();
-  }, []);
+  }, [pizzaSize]);
 
   async function fetchPizzaTypes() {
     const pizzasRes = await fetch("/api/pizzas");
