@@ -12,7 +12,6 @@ export default function Order() {
   const [pizzaSize, setPizzaSize] = useState("M");
   const [pizzaTypes, setPizzaTypes] = useState([]);
   const [loading, setLoading] = useState(true);
-
   let price, selectedPizza;
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
@@ -23,7 +22,7 @@ export default function Order() {
 
   useEffect(() => {
     fetchPizzaTypes();
-  }, [pizzaSize]);
+  }, []);
 
   async function fetchPizzaTypes() {
     const pizzasRes = await fetch("/api/pizzas");
