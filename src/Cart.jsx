@@ -18,7 +18,7 @@ export default function Cart({ cart, checkout  }) {
                     <li key={index}>
                         <span className="size">{item.size}</span> -
                         <span className="type">{item.pizza.name}</span> -
-                        <span className="price">{item.price}</span> -
+                        <span className="price">{item.price}</span> 
                     </li>
                 ))}
             </ul>
