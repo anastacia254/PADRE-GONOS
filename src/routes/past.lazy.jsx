@@ -9,7 +9,7 @@ export const Route = createLazyFileRoute("/past")({
 
 function PastOrdersRoute() {
   const [page, setPage] = useState(1);
-  const { isLoading, data = [] } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["past-orders", page],
     queryFn: () => getPastOrders(page),
     staleTime: 30000,
@@ -42,13 +42,14 @@ function PastOrdersRoute() {
         </tbody>
       </table>
       <div className="pages">
-        <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
+        <button disabled={page <=1} onClick={() => setPage(page - 1)}>
           Previous
         </button>
+        <div>{page}</div>
         <button disabled={data.length < 10} onClick={() => setPage(page + 1)}>
           Next
         </button>
       </div>
     </div>
   );
-}
+  }

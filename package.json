@@ -16,7 +16,7 @@
     "url": "git+https://github.com/anastacia254/PADRE-GONOS.git"
   },
   "keywords": [],
-  "type": "commonjs",
+  "type": "module",
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -26,8 +26,8 @@
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.59.7",
     "@tanstack/react-query-devtools": "^5.59.13",
-    "@tanstack/router-devtools": "^1.65.0",
-    "@tanstack/router-plugin": "^1.65.0",
+    "@tanstack/router-devtools": "^1.163.3",
+    "@tanstack/router-plugin": "^1.164.0",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.13",
-    "@tanstack/react-router": "^1.65.0",
-    "@tanstack/router-vite-plugin": "^1.160.2",
+    "@tanstack/react-router": "^1.163.3",
+    "@tanstack/router-vite-plugin": "^1.164.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }
