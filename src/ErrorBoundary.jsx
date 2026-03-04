@@ -4,33 +4,13 @@ import { Link } from "@tanstack/react-router";
 
 class ErrorBoundary extends Component { 
     state = { hasError: false };
-    constructor(props) {
-        super(props);
-
-        this.celebrateError = this.celebrateError.bind(this);
-    }
     static getDerivedStateFromError() {
-        return { hasError: true }
+        return { hasError: true };
     }
    componentDidCatch(error, info) {
-        console.error("ErrorBoundary caught some stupid error", error, info)
-   }
-   componentDidMount() {
-
-   }
-   componentWillUnmount() {
-
-   }
-   componentDidUpdate() {
-
-   }
-   componentError = () => {
-        this.setState{(
-            celebration:"Lol",
-        )};
+        console.error("ErrorBoundary caught some stupid error", error, info);
    }
     render() {
-        console.log(this.props.lol)
         if (this.state.hasError) {
             return (
             <div className="error-boundary">
@@ -46,10 +26,5 @@ class ErrorBoundary extends Component {
             return this.props.children;    
         }
     }
-function EBWithHooks() {
-    const potd = usePizzaOfTheDay()
-    return <ErrorBoundary potd= {potd}>
-}
-    export default ErrorBoundary;
 
-    <ErrorBoundary/>
+    export default ErrorBoundary;
