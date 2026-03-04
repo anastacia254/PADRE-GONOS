@@ -11,15 +11,17 @@ export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoutes,
 });
 
-function ErrorBoundaryWrappedPastOrderRoutes() {
+function ErrorBoundaryWrappedPastOrderRoutes(props) {
   return (
     <ErrorBoundary>
-      <PastOrdersRoute />
+      <PastOrdersRoute stuff={props.stuff} otherStuff={props.otherStuff} />
+      <PastOrdersRoute {...props} />
     </ErrorBoundary>
   );
 }
 
 function PastOrdersRoute() {
+  throw new Error("omg what the freak");
   const [page, setPage] = useState(1);
   const [focusedOrder, setFocusedOrder] = useState();
   const { isLoading, data } = useQuery({
