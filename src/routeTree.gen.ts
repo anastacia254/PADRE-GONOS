@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 
 const PastLazyRouteImport = createFileRoute('/past')()
+const ContactLazyRouteImport = createFileRoute('/contact')()
 const OrderLazyRouteImport = createFileRoute('/Order')()
 const IndexLazyRouteImport = createFileRoute('/')()
 
@@ -21,6 +22,11 @@ const PastLazyRoute = PastLazyRouteImport.update({
   path: '/past',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/past.lazy').then((d) => d.Route))
+const ContactLazyRoute = ContactLazyRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/contact.lazy').then((d) => d.Route))
 const OrderLazyRoute = OrderLazyRouteImport.update({
   id: '/Order',
   path: '/Order',
@@ -35,30 +41,34 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/Order': typeof OrderLazyRoute
+  '/contact': typeof ContactLazyRoute
   '/past': typeof PastLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/Order': typeof OrderLazyRoute
+  '/contact': typeof ContactLazyRoute
   '/past': typeof PastLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/Order': typeof OrderLazyRoute
+  '/contact': typeof ContactLazyRoute
   '/past': typeof PastLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/Order' | '/past'
+  fullPaths: '/' | '/Order' | '/contact' | '/past'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/Order' | '/past'
-  id: '__root__' | '/' | '/Order' | '/past'
+  to: '/' | '/Order' | '/contact' | '/past'
+  id: '__root__' | '/' | '/Order' | '/contact' | '/past'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   OrderLazyRoute: typeof OrderLazyRoute
+  ContactLazyRoute: typeof ContactLazyRoute
   PastLazyRoute: typeof PastLazyRoute
 }
 
@@ -69,6 +79,13 @@ declare module '@tanstack/react-router' {
       path: '/past'
       fullPath: '/past'
       preLoaderRoute: typeof PastLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/Order': {
@@ -91,6 +108,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   OrderLazyRoute: OrderLazyRoute,
+  ContactLazyRoute: ContactLazyRoute,
   PastLazyRoute: PastLazyRoute,
 }
 export const routeTree = rootRouteImport

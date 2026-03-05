@@ -4,24 +4,26 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import getPastOrders from "../api/getPastOrders";
 import getPastOrder from "../api/getPastOrder";
 import Modal from "../Modal";
-import { priceConverter } from "../useCurrency";
 import ErrorBoundary from "../ErrorBoundary";
 
 export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryWrappedPastOrderRoutes,
 });
 
-function ErrorBoundaryWrappedPastOrderRoutes(props) {
+const intl = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
+function ErrorBoundaryWrappedPastOrderRoutes() {
   return (
     <ErrorBoundary>
-      <PastOrdersRoute stuff={props.stuff} otherStuff={props.otherStuff} />
-      <PastOrdersRoute {...props} />
+      <PastOrdersRoute />
     </ErrorBoundary>
   );
 }
 
 function PastOrdersRoute() {
-  throw new Error("omg what the freak");
   const [page, setPage] = useState(1);
   const [focusedOrder, setFocusedOrder] = useState();
   const { isLoading, data } = useQuery({
@@ -33,9 +35,8 @@ function PastOrdersRoute() {
   const { isLoading: isLoadingPastOrder, data: pastOrderData } = useQuery({
     queryKey: ["past-order", focusedOrder],
     queryFn: () => getPastOrder(focusedOrder),
-  
-    staleTime: 86400000, // one day in milliseconds,
     enabled: !!focusedOrder,
+    staleTime: 24 * 60 * 60 * 1000, // one day in milliseconds,
   });
 
   if (isLoading) {
@@ -45,7 +46,6 @@ function PastOrdersRoute() {
       </div>
     );
   }
-
   return (
     <div className="past-orders">
       <table>
@@ -103,8 +103,8 @@ function PastOrdersRoute() {
                     <td>{pizza.name}</td>
                     <td>{pizza.size}</td>
                     <td>{pizza.quantity}</td>
-                    <td>{priceConverter(pizza.price)}</td>
-                    <td>{priceConverter(pizza.total)}</td>
+                    <td>{intl.format(pizza.price)}</td>
+                    <td>{intl.format(pizza.total)}</td>
                   </tr>
                 ))}
               </tbody>
